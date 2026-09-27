@@ -1,4 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("ASP_RazorPagesMovieContext") ?? throw new InvalidOperationException("Connection string 'ASP_RazorPagesMovieContext' not found.");
+
+builder.Services.AddDbContext<ASP_RazorPagesMovieContext>(options => options.UseNpgsql(connectionString));
 
 // Add services to the container.
 builder.Services.AddRazorPages();
